@@ -1,0 +1,17 @@
+actionlint = ">=1.7.7"
+go = "1.25"
+node = "22"
+npm = "stable"
+python = "3.13"
+rust = "1.90"
+shellcheck = ">=0.11.0"
+trivy = ">=0.67.0"
+empty-tool = ""
+
+[plugins]
+actionlint = "https://raw.githubusercontent.com/ageha734/proto-plugins/refs/heads/master/toml/actionlint.toml"
+trivy = "https://raw.githubusercontent.com/ageha734/proto-plugins/refs/heads/master/toml/trivy.toml"
+awscli = "github://ageha734/proto-awscli"
+
+[settings]
+auto-install = true

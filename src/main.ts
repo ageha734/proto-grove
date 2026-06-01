@@ -1,5 +1,5 @@
 import { parsePrototools } from "./parser/prototools.ts";
-import { parseConstraint, rewriteConstraint } from "./parser/constraint.ts";
+import { rewriteConstraint } from "./parser/constraint.ts";
 import { resolveRepo } from "./resolver/mod.ts";
 import { fetchLatestVersion } from "./version/fetcher.ts";
 import { isOutdated, detectUpdateType } from "./version/comparator.ts";
@@ -9,7 +9,6 @@ import { createUpdatePr } from "./github/pr.ts";
 import { updateDashboardIssue } from "./github/issue.ts";
 import { defaultConfig, loadConfig } from "./config.ts";
 import type { UpdateInfo } from "./version/comparator.ts";
-import type { ResolvedRepo } from "./resolver/mod.ts";
 import type { Vulnerability } from "./security/osv.ts";
 
 interface RunResult {

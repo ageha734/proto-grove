@@ -1,11 +1,12 @@
-FROM denoland/deno:alpine-2.3.1
+FROM denoland/deno:alpine-2.3.1@sha256:0bcd1133073275fec13473f221f662627c7f2d8ab0b78f1b0662525e2efbe409
 
 RUN apk add --no-cache git
 
 WORKDIR /app
 
-COPY deno.json deno.lock ./
-RUN deno install --frozen
+COPY deno.json ./
+COPY deno.lock* ./
+RUN deno install
 
 COPY src/ ./src/
 

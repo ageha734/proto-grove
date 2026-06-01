@@ -6,13 +6,18 @@ on:
     paths-ignore:
       - "docs/**"
       - "*.md"
+      - "CONTRIBUTING.md"
 
 permissions:
   contents: write
   packages: write
 
 jobs:
+  ci:
+    uses: ./.github/workflows/ci.yaml
+
   release:
+    needs: [ci]
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip release]')"
     steps:
@@ -56,7 +61,7 @@ jobs:
           echo "new_version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
           echo "Releasing $NEW_VERSION ($BUMP bump from $LATEST_TAG)"
 
-      - name: Create tag and release
+      - name: Create pre-release
         if: steps.bump.outputs.bump != 'none' && steps.bump.outputs.new_version != ''
         env:
           GH_TOKEN: ${{ github.token }}
@@ -71,7 +76,8 @@ jobs:
 
           gh release create "$NEW_VERSION" \
             --generate-notes \
-            --title "$NEW_VERSION"
+            --title "$NEW_VERSION" \
+            --prerelease
 
       - name: Update major version tag
         if: steps.bump.outputs.bump != 'none' && steps.bump.outputs.new_version != ''
@@ -80,3 +86,26 @@ jobs:
           MAJOR=$(echo "$NEW_VERSION" | cut -d. -f1)
           git tag -f "$MAJOR"
           git push -f origin "$MAJOR"
+
+      - name: Log in to GHCR
+        if: steps.bump.outputs.bump != 'none' && steps.bump.outputs.new_version != ''
+        uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        if: steps.bump.outputs.bump != 'none' && steps.bump.outputs.new_version != ''
+        uses: docker/setup-buildx-action@b5ca514318bd6ebac0fb2aedd5d36ec1b5c232a2 # v3.10.0
+
+      - name: Build and push Docker image
+        if: steps.bump.outputs.bump != 'none' && steps.bump.outputs.new_version != ''
+        uses: docker/build-push-action@14487ce63c7a62a4a324b0bfb37086795e31c6c1 # v6.16.0
+        with:
+          context: .
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            ghcr.io/${{ github.repository }}:${{ steps.bump.outputs.new_version }}
+            ghcr.io/${{ github.repository }}:latest

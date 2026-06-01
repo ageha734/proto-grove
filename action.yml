@@ -1,63 +1,63 @@
-name: 'proto-grove'
-description: 'Automated version management for moonrepo proto tools. Renovate-style updates for .prototools.'
-author: 'ageha734'
+name: "proto-grove"
+description: "Automated version management for moonrepo proto tools. Renovate-style updates for .prototools."
+author: "ageha734"
 
 branding:
-  icon: 'refresh-cw'
-  color: 'green'
+  icon: "refresh-cw"
+  color: "green"
 
 inputs:
   prototools-path:
-    description: 'Path to .prototools file (relative to repo root)'
+    description: "Path to .prototools file (relative to repo root)"
     required: false
-    default: '.prototools'
+    default: ".prototools"
   config-path:
-    description: 'Path to proto-grove configuration file'
+    description: "Path to proto-grove configuration file"
     required: false
-    default: '.github/proto-grove.toml'
+    default: ".github/proto-grove.toml"
   github-token:
-    description: 'GitHub token for API access and PR creation'
+    description: "GitHub token for API access and PR creation"
     required: true
-    default: '${{ github.token }}'
+    default: "${{ github.token }}"
   branch-prefix:
-    description: 'Branch name prefix for update PRs'
+    description: "Branch name prefix for update PRs"
     required: false
-    default: 'deps/proto'
+    default: "deps/proto"
   automerge-label:
-    description: 'Label to apply for auto-mergeable PRs'
+    description: "Label to apply for auto-mergeable PRs"
     required: false
-    default: 'automerge'
+    default: "automerge"
   labels:
-    description: 'Comma-separated labels to add to all PRs'
+    description: "Comma-separated labels to add to all PRs"
     required: false
-    default: 'dependencies'
+    default: "dependencies"
   security-labels:
-    description: 'Labels for security-related PRs/issues'
+    description: "Labels for security-related PRs/issues"
     required: false
-    default: 'security'
+    default: "security"
   dashboard:
-    description: 'Enable dependency dashboard issue'
+    description: "Enable dependency dashboard issue"
     required: false
-    default: 'true'
+    default: "true"
   dry-run:
-    description: 'Run without creating PRs (audit only)'
+    description: "Run without creating PRs (audit only)"
     required: false
-    default: 'false'
+    default: "false"
   log-level:
-    description: 'Log verbosity (debug, info, warn, error)'
+    description: "Log verbosity (debug, info, warn, error)"
     required: false
-    default: 'info'
+    default: "info"
 
 outputs:
   outdated-count:
-    description: 'Number of outdated tools detected'
+    description: "Number of outdated tools detected"
   prs-created:
-    description: 'Number of PRs created in this run'
+    description: "Number of PRs created in this run"
   cves-found:
-    description: 'Number of CVEs found in current versions'
+    description: "Number of CVEs found in current versions"
   summary:
-    description: 'Markdown summary of the audit'
+    description: "Markdown summary of the audit"
 
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "docker"
+  image: "Dockerfile"

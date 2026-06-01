@@ -2,7 +2,7 @@ import { parsePrototools } from "./parser/prototools.ts";
 import { rewriteConstraint } from "./parser/constraint.ts";
 import { resolveRepo } from "./resolver/mod.ts";
 import { fetchLatestVersion } from "./version/fetcher.ts";
-import { isOutdated, detectUpdateType } from "./version/comparator.ts";
+import { detectUpdateType, isOutdated } from "./version/comparator.ts";
 import { checkVulnerabilities } from "./security/osv.ts";
 import { createClient } from "./github/client.ts";
 import { createUpdatePr } from "./github/pr.ts";
@@ -21,7 +21,8 @@ interface RunResult {
 async function run(): Promise<RunResult> {
   const token = Deno.env.get("INPUT_GITHUB-TOKEN") ?? "";
   const prototoolsPath = Deno.env.get("INPUT_PROTOTOOLS-PATH") ?? ".prototools";
-  const configPath = Deno.env.get("INPUT_CONFIG-PATH") ?? ".github/proto-grove.toml";
+  const configPath = Deno.env.get("INPUT_CONFIG-PATH") ??
+    ".github/proto-grove.toml";
   const branchPrefix = Deno.env.get("INPUT_BRANCH-PREFIX") ?? "deps/proto";
   const automergeLabel = Deno.env.get("INPUT_AUTOMERGE-LABEL") ?? "automerge";
   const dashboardEnabled = Deno.env.get("INPUT_DASHBOARD") !== "false";
@@ -54,7 +55,9 @@ async function run(): Promise<RunResult> {
   const updates: UpdateInfo[] = [];
   const upToDate: Array<{ tool: string; version: string; repo: string }> = [];
   const skipped: Array<{ tool: string; reason: string }> = [];
-  const allCves: Array<{ tool: string; version: string; vulns: Vulnerability[] }> = [];
+  const allCves: Array<
+    { tool: string; version: string; vulns: Vulnerability[] }
+  > = [];
   const dashboardUpdates: Array<{
     tool: string;
     current: string;
@@ -101,7 +104,10 @@ async function run(): Promise<RunResult> {
     // Fetch latest version
     const latest = await fetchLatestVersion(repo, config, token);
     if (!latest) {
-      skipped.push({ tool: tool.name, reason: "Could not fetch latest version" });
+      skipped.push({
+        tool: tool.name,
+        reason: "Could not fetch latest version",
+      });
       continue;
     }
 
@@ -151,13 +157,17 @@ async function run(): Promise<RunResult> {
         if (result?.created) {
           prsCreated++;
           prNumber = result.number;
-          log.info(`Created PR #${result.number} for ${tool.name}: ${current} → ${latest}`);
+          log.info(
+            `Created PR #${result.number} for ${tool.name}: ${current} → ${latest}`,
+          );
         } else if (result) {
           log.info(`PR already exists for ${tool.name} (${latest})`);
           prNumber = result.number;
         }
       } else {
-        log.info(`[dry-run] Would create PR: ${tool.name} ${current} → ${latest} (${updateType})`);
+        log.info(
+          `[dry-run] Would create PR: ${tool.name} ${current} → ${latest} (${updateType})`,
+        );
       }
 
       dashboardUpdates.push({
@@ -241,14 +251,18 @@ function buildSummary(
   summary += `| Outdated | ${updates.length} |\n`;
   summary += `| Up-to-date | ${upToDate.length} |\n`;
   summary += `| Skipped | ${skipped.length} |\n`;
-  summary += `| CVEs found | ${cves.reduce((acc, c) => acc + c.vulns.length, 0)} |\n`;
+  summary += `| CVEs found | ${
+    cves.reduce((acc, c) => acc + c.vulns.length, 0)
+  } |\n`;
   summary += `| PRs created | ${prsCreated} |\n\n`;
 
   if (updates.length > 0) {
     summary += "## Updates\n\n";
-    summary += "| Tool | Current | Latest | Type |\n|------|---------|--------|------|\n";
+    summary +=
+      "| Tool | Current | Latest | Type |\n|------|---------|--------|------|\n";
     for (const u of updates) {
-      summary += `| ${u.tool} | ${u.currentVersion} | ${u.latestVersion} | ${u.updateType} |\n`;
+      summary +=
+        `| ${u.tool} | ${u.currentVersion} | ${u.latestVersion} | ${u.updateType} |\n`;
     }
     summary += "\n";
   }

@@ -1,8 +1,5 @@
 import { assertEquals } from "@std/assert";
-import {
-  isOutdated,
-  detectUpdateType,
-} from "../../src/version/comparator.ts";
+import { detectUpdateType, isOutdated } from "../../src/version/comparator.ts";
 
 Deno.test("isOutdated - newer version available", () => {
   assertEquals(isOutdated("1.7.7", "1.8.0"), true);

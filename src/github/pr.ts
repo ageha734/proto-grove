@@ -1,5 +1,5 @@
 import type { GitHubClient } from "./client.ts";
-import { githubApi, getDefaultBranch, getReleaseNotes } from "./client.ts";
+import { getDefaultBranch, getReleaseNotes, githubApi } from "./client.ts";
 import type { UpdateInfo } from "../version/comparator.ts";
 import type { Vulnerability } from "../security/osv.ts";
 import type { Config } from "../config.ts";
@@ -53,7 +53,8 @@ export async function createUpdatePr(
   if (!fileUpdated) return null;
 
   // Create PR
-  const title = `${config.general.prTitlePrefix} update ${update.tool} to ${update.latestVersion}`;
+  const title =
+    `${config.general.prTitlePrefix} update ${update.tool} to ${update.latestVersion}`;
 
   const response = await githubApi(
     client,
@@ -159,7 +160,10 @@ async function updateFileOnBranch(
 
   const currentContent = atob(fileData.content.replace(/\n/g, ""));
   const updatedContent = currentContent.replace(
-    new RegExp(`^(${update.tool}\\s*=\\s*")${escapeRegex(update.constraint.raw)}"`, "m"),
+    new RegExp(
+      `^(${update.tool}\\s*=\\s*")${escapeRegex(update.constraint.raw)}"`,
+      "m",
+    ),
     `$1${update.newConstraintValue}"`,
   );
 
@@ -172,7 +176,9 @@ async function updateFileOnBranch(
     {
       method: "PUT",
       body: JSON.stringify({
-        message: `${Deno.env.get("INPUT_COMMIT-MESSAGE-PREFIX") ?? "chore(deps):"} update ${update.tool} to ${update.latestVersion}`,
+        message: `${
+          Deno.env.get("INPUT_COMMIT-MESSAGE-PREFIX") ?? "chore(deps):"
+        } update ${update.tool} to ${update.latestVersion}`,
         content: btoa(updatedContent),
         sha: fileData.sha,
         branch: newBranch,
@@ -189,9 +195,11 @@ function buildPrBody(
   releaseNotes: string,
   vulnerabilities: Vulnerability[],
 ): string {
-  const compareUrl = `https://github.com/${upstream.owner}/${upstream.repo}/compare/v${update.currentVersion}...v${update.latestVersion}`;
+  const compareUrl =
+    `https://github.com/${upstream.owner}/${upstream.repo}/compare/v${update.currentVersion}...v${update.latestVersion}`;
 
-  let body = `## Update \`${update.tool}\` from \`${update.currentVersion}\` to \`${update.latestVersion}\`
+  let body =
+    `## Update \`${update.tool}\` from \`${update.currentVersion}\` to \`${update.latestVersion}\`
 
 | Package | Type | Update | Current | Latest |
 |---------|------|--------|---------|--------|
@@ -217,7 +225,10 @@ ${releaseNotes || "_No release notes available_"}
 
 | CVE | Summary | Severity |
 |-----|---------|----------|
-${vulnerabilities.map((v) => `| ${v.id} | ${v.summary} | ${v.severity} |`).join("\n")}
+${
+      vulnerabilities.map((v) => `| ${v.id} | ${v.summary} | ${v.severity} |`)
+        .join("\n")
+    }
 
 > Updating is strongly recommended.`;
   }

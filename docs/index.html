@@ -1,163 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>proto-grove - Documentation</title>
-  <style>
-    :root {
-      --bg: #0d1117;
-      --surface: #161b22;
-      --border: #30363d;
-      --text: #e6edf3;
-      --text-muted: #8b949e;
-      --accent: #3fb950;
-      --accent-dim: #238636;
-      --code-bg: #1c2128;
-      --link: #58a6ff;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Noto Sans, Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-    .container { max-width: 960px; margin: 0 auto; padding: 2rem; }
-    header {
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 2rem;
-      margin-bottom: 3rem;
-    }
-    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-    h1 span { color: var(--accent); }
-    .tagline { color: var(--text-muted); font-size: 1.2rem; }
-    h2 {
-      font-size: 1.5rem;
-      margin: 2.5rem 0 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-    h3 { font-size: 1.2rem; margin: 1.5rem 0 0.5rem; color: var(--accent); }
-    p { margin-bottom: 1rem; }
-    a { color: var(--link); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    pre {
-      background: var(--code-bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 1rem;
-      overflow-x: auto;
-      margin: 1rem 0;
-      font-size: 0.9rem;
-    }
-    code {
-      background: var(--code-bg);
-      padding: 0.2em 0.4em;
-      border-radius: 3px;
-      font-size: 0.9em;
-    }
-    pre code { background: none; padding: 0; }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1rem 0;
-    }
-    th, td {
-      border: 1px solid var(--border);
-      padding: 0.5rem 1rem;
-      text-align: left;
-    }
-    th { background: var(--surface); }
-    .badge {
-      display: inline-block;
-      background: var(--accent-dim);
-      color: white;
-      padding: 0.2rem 0.6rem;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      margin-right: 0.5rem;
-    }
-    nav {
-      position: sticky;
-      top: 1rem;
-      float: right;
-      width: 200px;
-      padding: 1rem;
-      background: var(--surface);
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      margin-left: 2rem;
-    }
-    nav ul { list-style: none; }
-    nav li { margin: 0.5rem 0; }
-    nav a { color: var(--text-muted); font-size: 0.9rem; }
-    nav a:hover { color: var(--accent); }
-    @media (max-width: 768px) {
-      nav { display: none; }
-      .container { padding: 1rem; }
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <header>
-      <h1><span>proto-grove</span></h1>
-      <p class="tagline">Automated version management for moonrepo proto tools</p>
-      <p>
-        <span class="badge">v1</span>
-        <a href="https://github.com/ageha734/proto-grove">GitHub</a> |
-        <a href="https://github.com/ageha734/proto-grove/actions">CI Status</a>
-      </p>
-    </header>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>proto-grove - Documentation</title>
+    <style>
+      :root {
+        --bg: #0d1117;
+        --surface: #161b22;
+        --border: #30363d;
+        --text: #e6edf3;
+        --text-muted: #8b949e;
+        --accent: #3fb950;
+        --accent-dim: #238636;
+        --code-bg: #1c2128;
+        --link: #58a6ff;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Noto Sans, Helvetica,
+          Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      header {
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 2rem;
+        margin-bottom: 3rem;
+      }
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+      h1 span {
+        color: var(--accent);
+      }
+      .tagline {
+        color: var(--text-muted);
+        font-size: 1.2rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+        margin: 2.5rem 0 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+      h3 {
+        font-size: 1.2rem;
+        margin: 1.5rem 0 0.5rem;
+        color: var(--accent);
+      }
+      p {
+        margin-bottom: 1rem;
+      }
+      a {
+        color: var(--link);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      pre {
+        background: var(--code-bg);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 1rem;
+        overflow-x: auto;
+        margin: 1rem 0;
+        font-size: 0.9rem;
+      }
+      code {
+        background: var(--code-bg);
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+        font-size: 0.9em;
+      }
+      pre code {
+        background: none;
+        padding: 0;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+      }
+      th, td {
+        border: 1px solid var(--border);
+        padding: 0.5rem 1rem;
+        text-align: left;
+      }
+      th {
+        background: var(--surface);
+      }
+      .badge {
+        display: inline-block;
+        background: var(--accent-dim);
+        color: white;
+        padding: 0.2rem 0.6rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        margin-right: 0.5rem;
+      }
+      nav {
+        position: sticky;
+        top: 1rem;
+        float: right;
+        width: 200px;
+        padding: 1rem;
+        background: var(--surface);
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        margin-left: 2rem;
+      }
+      nav ul {
+        list-style: none;
+      }
+      nav li {
+        margin: 0.5rem 0;
+      }
+      nav a {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+      nav a:hover {
+        color: var(--accent);
+      }
+      @media (max-width: 768px) {
+        nav {
+          display: none;
+        }
+        .container {
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><span>proto-grove</span></h1>
+        <p class="tagline">
+          Automated version management for moonrepo proto tools
+        </p>
+        <p>
+          <span class="badge">v1</span>
+          <a href="https://github.com/ageha734/proto-grove">GitHub</a> |
+          <a href="https://github.com/ageha734/proto-grove/actions"
+          >CI Status</a>
+        </p>
+      </header>
 
-    <nav>
-      <ul>
-        <li><a href="#quick-start">Quick Start</a></li>
-        <li><a href="#inputs">Inputs</a></li>
-        <li><a href="#outputs">Outputs</a></li>
-        <li><a href="#configuration">Configuration</a></li>
-        <li><a href="#constraints">Version Constraints</a></li>
-        <li><a href="#resolution">Repo Resolution</a></li>
-        <li><a href="#security">Security Scanning</a></li>
-        <li><a href="#dashboard">Dashboard</a></li>
-        <li><a href="#examples">Examples</a></li>
-      </ul>
-    </nav>
+      <nav>
+        <ul>
+          <li><a href="#quick-start">Quick Start</a></li>
+          <li><a href="#inputs">Inputs</a></li>
+          <li><a href="#outputs">Outputs</a></li>
+          <li><a href="#configuration">Configuration</a></li>
+          <li><a href="#constraints">Version Constraints</a></li>
+          <li><a href="#resolution">Repo Resolution</a></li>
+          <li><a href="#security">Security Scanning</a></li>
+          <li><a href="#dashboard">Dashboard</a></li>
+          <li><a href="#examples">Examples</a></li>
+        </ul>
+      </nav>
 
-    <main>
-      <h2 id="quick-start">Quick Start</h2>
-      <pre><code>- uses: ageha734/proto-grove@v1
+      <main>
+        <h2 id="quick-start">Quick Start</h2>
+        <pre><code>- uses: ageha734/proto-grove@v1
   with:
     github-token: ${{ secrets.GITHUB_TOKEN }}</code></pre>
-      <p>That's it. proto-grove will parse your <code>.prototools</code>, check for updates, and create PRs.</p>
+        <p>
+          That's it. proto-grove will parse your <code>.prototools</code>, check
+          for updates, and create PRs.
+        </p>
 
-      <h2 id="inputs">Inputs Reference</h2>
-      <table>
-        <tr><th>Input</th><th>Default</th><th>Description</th></tr>
-        <tr><td><code>prototools-path</code></td><td><code>.prototools</code></td><td>Path to .prototools file</td></tr>
-        <tr><td><code>config-path</code></td><td><code>.github/proto-grove.toml</code></td><td>Configuration file path</td></tr>
-        <tr><td><code>github-token</code></td><td><code>${{ github.token }}</code></td><td>Token for API access</td></tr>
-        <tr><td><code>branch-prefix</code></td><td><code>deps/proto</code></td><td>PR branch prefix</td></tr>
-        <tr><td><code>automerge-label</code></td><td><code>automerge</code></td><td>Label for auto-merge</td></tr>
-        <tr><td><code>labels</code></td><td><code>dependencies</code></td><td>Base labels for all PRs</td></tr>
-        <tr><td><code>dashboard</code></td><td><code>true</code></td><td>Enable dashboard issue</td></tr>
-        <tr><td><code>dry-run</code></td><td><code>false</code></td><td>Audit only mode</td></tr>
-        <tr><td><code>log-level</code></td><td><code>info</code></td><td>Log verbosity</td></tr>
-      </table>
+        <h2 id="inputs">Inputs Reference</h2>
+        <table>
+          <tr>
+            <th>Input</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><code>prototools-path</code></td>
+            <td><code>.prototools</code></td>
+            <td>Path to .prototools file</td>
+          </tr>
+          <tr>
+            <td><code>config-path</code></td>
+            <td><code>.github/proto-grove.toml</code></td>
+            <td>Configuration file path</td>
+          </tr>
+          <tr>
+            <td><code>github-token</code></td>
+            <td><code>${{ github.token }}</code></td>
+            <td>Token for API access</td>
+          </tr>
+          <tr>
+            <td><code>branch-prefix</code></td>
+            <td><code>deps/proto</code></td>
+            <td>PR branch prefix</td>
+          </tr>
+          <tr>
+            <td><code>automerge-label</code></td>
+            <td><code>automerge</code></td>
+            <td>Label for auto-merge</td>
+          </tr>
+          <tr>
+            <td><code>labels</code></td>
+            <td><code>dependencies</code></td>
+            <td>Base labels for all PRs</td>
+          </tr>
+          <tr>
+            <td><code>dashboard</code></td>
+            <td><code>true</code></td>
+            <td>Enable dashboard issue</td>
+          </tr>
+          <tr>
+            <td><code>dry-run</code></td>
+            <td><code>false</code></td>
+            <td>Audit only mode</td>
+          </tr>
+          <tr>
+            <td><code>log-level</code></td>
+            <td><code>info</code></td>
+            <td>Log verbosity</td>
+          </tr>
+        </table>
 
-      <h2 id="outputs">Outputs</h2>
-      <table>
-        <tr><th>Output</th><th>Description</th></tr>
-        <tr><td><code>outdated-count</code></td><td>Number of outdated tools detected</td></tr>
-        <tr><td><code>prs-created</code></td><td>Number of PRs created</td></tr>
-        <tr><td><code>cves-found</code></td><td>Number of CVEs found</td></tr>
-        <tr><td><code>summary</code></td><td>Markdown summary</td></tr>
-      </table>
+        <h2 id="outputs">Outputs</h2>
+        <table>
+          <tr>
+            <th>Output</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><code>outdated-count</code></td>
+            <td>Number of outdated tools detected</td>
+          </tr>
+          <tr>
+            <td><code>prs-created</code></td>
+            <td>Number of PRs created</td>
+          </tr>
+          <tr>
+            <td><code>cves-found</code></td>
+            <td>Number of CVEs found</td>
+          </tr>
+          <tr>
+            <td><code>summary</code></td>
+            <td>Markdown summary</td>
+          </tr>
+        </table>
 
-      <h2 id="configuration">Configuration</h2>
-      <p>Create <code>.github/proto-grove.toml</code>:</p>
-      <pre><code>[general]
+        <h2 id="configuration">Configuration</h2>
+        <p>Create <code>.github/proto-grove.toml</code>:</p>
+        <pre><code>[general]
 create-dashboard = true
 commit-message-prefix = "chore(deps):"
 
@@ -179,41 +287,86 @@ tools = ["npm", "gcloud"]
 enabled = true
 ecosystems = ["Go", "PyPI", "npm", "crates.io"]</code></pre>
 
-      <h2 id="constraints">Version Constraint Support</h2>
-      <table>
-        <tr><th>Format</th><th>Example</th><th>Update Behavior</th></tr>
-        <tr><td><code>&gt;=x.y.z</code></td><td><code>&gt;=1.7.7</code></td><td>Updates floor to latest</td></tr>
-        <tr><td><code>x.y.z</code></td><td><code>1.7.7</code></td><td>Pins to new exact</td></tr>
-        <tr><td><code>x.y</code></td><td><code>1.25</code></td><td>Latest within major.minor</td></tr>
-        <tr><td><code>x</code></td><td><code>22</code></td><td>Latest within major</td></tr>
-        <tr><td><code>stable</code></td><td>-</td><td>Skipped</td></tr>
-        <tr><td><code>""</code></td><td>-</td><td>Skipped</td></tr>
-      </table>
+        <h2 id="constraints">Version Constraint Support</h2>
+        <table>
+          <tr>
+            <th>Format</th>
+            <th>Example</th>
+            <th>Update Behavior</th>
+          </tr>
+          <tr>
+            <td><code>&gt;=x.y.z</code></td>
+            <td><code>&gt;=1.7.7</code></td>
+            <td>Updates floor to latest</td>
+          </tr>
+          <tr>
+            <td><code>x.y.z</code></td>
+            <td><code>1.7.7</code></td>
+            <td>Pins to new exact</td>
+          </tr>
+          <tr>
+            <td><code>x.y</code></td>
+            <td><code>1.25</code></td>
+            <td>Latest within major.minor</td>
+          </tr>
+          <tr>
+            <td><code>x</code></td>
+            <td><code>22</code></td>
+            <td>Latest within major</td>
+          </tr>
+          <tr>
+            <td><code>stable</code></td>
+            <td>-</td>
+            <td>Skipped</td>
+          </tr>
+          <tr>
+            <td><code>""</code></td>
+            <td>-</td>
+            <td>Skipped</td>
+          </tr>
+        </table>
 
-      <h2 id="resolution">Repository Resolution</h2>
-      <p>proto-grove resolves upstream repos in order:</p>
-      <ol style="padding-left: 1.5rem; margin: 1rem 0;">
-        <li><strong>Config overrides</strong> — <code>[repos]</code> in proto-grove.toml</li>
-        <li><strong>Plugin TOML</strong> — Fetches plugin definition, reads <code>git-url</code> / <code>github-repo</code></li>
-        <li><strong>GitHub search</strong> — Searches by tool name, sorted by stars</li>
-      </ol>
+        <h2 id="resolution">Repository Resolution</h2>
+        <p>proto-grove resolves upstream repos in order:</p>
+        <ol style="padding-left: 1.5rem; margin: 1rem 0">
+          <li>
+            <strong>Config overrides</strong> — <code>[repos]</code> in
+            proto-grove.toml
+          </li>
+          <li>
+            <strong>Plugin TOML</strong> — Fetches plugin definition, reads
+            <code>git-url</code> / <code>github-repo</code>
+          </li>
+          <li>
+            <strong>GitHub search</strong> — Searches by tool name, sorted by
+            stars
+          </li>
+        </ol>
 
-      <h2 id="security">Security Scanning</h2>
-      <p>Queries <a href="https://osv.dev">OSV.dev</a> for known vulnerabilities in current versions. Checks multiple ecosystems (Go, PyPI, npm, crates.io, RubyGems). CVEs are included in PR descriptions and the dashboard issue.</p>
+        <h2 id="security">Security Scanning</h2>
+        <p>
+          Queries <a href="https://osv.dev">OSV.dev</a> for known
+          vulnerabilities in current versions. Checks multiple ecosystems (Go,
+          PyPI, npm, crates.io, RubyGems). CVEs are included in PR descriptions
+          and the dashboard issue.
+        </p>
 
-      <h2 id="dashboard">Dependency Dashboard</h2>
-      <p>When <code>dashboard: true</code>, proto-grove maintains a single GitHub issue titled "Dependency Dashboard" with:</p>
-      <ul style="padding-left: 1.5rem; margin: 1rem 0;">
-        <li>Pending updates (with links to PRs)</li>
-        <li>Up-to-date tools</li>
-        <li>Skipped tools (with reasons)</li>
-        <li>Security alerts</li>
-      </ul>
+        <h2 id="dashboard">Dependency Dashboard</h2>
+        <p>
+          When <code>dashboard: true</code>, proto-grove maintains a single
+          GitHub issue titled "Dependency Dashboard" with:
+        </p>
+        <ul style="padding-left: 1.5rem; margin: 1rem 0">
+          <li>Pending updates (with links to PRs)</li>
+          <li>Up-to-date tools</li>
+          <li>Skipped tools (with reasons)</li>
+          <li>Security alerts</li>
+        </ul>
 
-      <h2 id="examples">Examples</h2>
+        <h2 id="examples">Examples</h2>
 
-      <h3>Weekly update check</h3>
-      <pre><code>on:
+        <h3>Weekly update check</h3>
+        <pre><code>on:
   schedule:
     - cron: "0 9 * * 1"
   workflow_dispatch:
@@ -229,8 +382,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}</code></pre>
 
-      <h3>Dry-run on PRs (audit only)</h3>
-      <pre><code>on:
+        <h3>Dry-run on PRs (audit only)</h3>
+        <pre><code>on:
   pull_request:
     paths: ['**/.*prototools']
 
@@ -246,12 +399,12 @@ jobs:
           dry-run: 'true'
       - run: echo "Outdated: ${{ steps.grove.outputs.outdated-count }}"</code></pre>
 
-      <h3>Custom prototools path (chezmoi)</h3>
-      <pre><code>- uses: ageha734/proto-grove@v1
+        <h3>Custom prototools path (chezmoi)</h3>
+        <pre><code>- uses: ageha734/proto-grove@v1
   with:
     prototools-path: 'dot_proto/dot_prototools'
     github-token: ${{ secrets.GITHUB_TOKEN }}</code></pre>
-    </main>
-  </div>
-</body>
+      </main>
+    </div>
+  </body>
 </html>

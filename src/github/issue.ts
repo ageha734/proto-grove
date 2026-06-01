@@ -87,7 +87,8 @@ This issue tracks all proto tool dependencies managed by proto-grove.
 `;
     for (const u of updates) {
       const prLink = u.prNumber ? `#${u.prNumber}` : "-";
-      body += `| ${u.tool} | ${u.current} | ${u.latest} | ${u.updateType} | ${prLink} |\n`;
+      body +=
+        `| ${u.tool} | ${u.current} | ${u.latest} | ${u.updateType} | ${prLink} |\n`;
     }
     body += "\n";
   }

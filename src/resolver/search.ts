@@ -6,7 +6,9 @@ export async function resolveFromSearch(
 ): Promise<ResolvedRepo | null> {
   try {
     const response = await fetch(
-      `https://api.github.com/search/repositories?q=${encodeURIComponent(toolName)}+in:name&sort=stars&per_page=1`,
+      `https://api.github.com/search/repositories?q=${
+        encodeURIComponent(toolName)
+      }+in:name&sort=stars&per_page=1`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

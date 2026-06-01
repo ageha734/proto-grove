@@ -4,8 +4,9 @@ RUN apk add --no-cache git
 
 WORKDIR /app
 
-COPY deno.json deno.lock ./
-RUN deno install --frozen
+COPY deno.json ./
+COPY deno.lock* ./
+RUN deno install
 
 COPY src/ ./src/
 
